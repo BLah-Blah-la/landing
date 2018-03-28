@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'img')->fileInput()->label('Заменить картинку') ?>
+    <?= $form->field($model, 'img')->fileInput()->label('Заменить картинку')?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

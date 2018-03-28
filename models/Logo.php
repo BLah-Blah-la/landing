@@ -36,7 +36,7 @@ class Logo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-		    [['img'], 'file', 'extensions' => 'png', 'jpg'], 
+		    [['img'], 'file', 'extensions' => 'png, jpg'],
             [['logo_image'], 'string', 'max' => 255],
         ];
     }

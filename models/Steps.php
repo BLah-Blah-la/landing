@@ -39,7 +39,7 @@ class Steps extends \yii\db\ActiveRecord
     {
         return [
             [['description'], 'string'],
-			[['img'], 'file', 'extensions' => 'png', 'jpg'],
+			[['img'], 'file', 'extensions' => 'png, jpg'],
             [['title_item'], 'string', 'max' => 30],
             [['image'], 'string', 'max' => 50],
         ];

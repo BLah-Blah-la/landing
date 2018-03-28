@@ -4,7 +4,7 @@ namespace vendor\landing\partner\controllers;
 
 use Yii;
 use vendor\landing\partner\models\Steps;
-use vendor\landing\partner\search\StepsSearch;
+use vendor\landing\partner\models\search\StepsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
