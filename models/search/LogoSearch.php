@@ -1,25 +1,27 @@
 <?php
 
-namespace backend\models\landing\search;
+namespace vendor\landing\partner\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\landing\Logo as LogoModel;
+use vendor\landing\partner\models\Logo as LogoModel;
 
 /**
  * Logo represents the model behind the search form of `backend\models\landing\Logo`.
  */
-class Logo extends LogoModel
+class LogoSearch extends LogoModel
 {
     /**
      * @inheritdoc
      */
+	
     public function rules()
     {
         return [
+		    
             [['id'], 'integer'],
-            [['logo_image', 'description'], 'safe'],
+            [['logo_image'], 'safe'],
         ];
     }
 
@@ -62,8 +64,7 @@ class Logo extends LogoModel
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'logo_image', $this->logo_image])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'logo_image', $this->logo_image]);
 
         return $dataProvider;
     }

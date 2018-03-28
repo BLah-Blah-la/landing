@@ -27,12 +27,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
-        'attributes' => [
-            'id',
+            'attributes' => [
             'title_item',
             'description:ntext',
-            'image',
+            [
+			  'label' => 'image',
+			  'format' => 'raw',
+			  'value' => function($data){
+				  
+				  return Html::img(Url::toRoute($data->image),
+				  [
+				  'style' => 'width:50px;height:50px'
+				  
+				  ]);
+			  }
+			
+			],
         ],
-    ]) ?>
+		]) ?>
 
 </div>

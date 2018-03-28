@@ -1,6 +1,6 @@
 <?php
 
-namespace app\backend\models;
+namespace vendor\landing\partner\models;
 
 use Yii;
 
@@ -15,6 +15,8 @@ class Logo extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+	public $img;
+	
     public static function tableName()
     {
         return 'logo';
@@ -34,6 +36,7 @@ class Logo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+		    [['img'], 'file', 'extensions' => 'png', 'jpg'], 
             [['logo_image'], 'string', 'max' => 255],
         ];
     }
@@ -48,4 +51,10 @@ class Logo extends \yii\db\ActiveRecord
             'logo_image' => 'Logo Image',
         ];
     }
+	
+    public function upload($path)
+    {
+		$this->logo_image = $path;
+		return true;
+		}
 }

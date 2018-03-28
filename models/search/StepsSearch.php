@@ -1,11 +1,11 @@
 <?php
 
-namespace backend\models\landing\search;
+namespace vendor\landing\partner\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\landing\Steps;
+use vendor\landing\partner\models\Steps;
 
 /**
  * StepsSearch represents the model behind the search form of `backend\models\landing\Steps`.
@@ -18,6 +18,7 @@ class StepsSearch extends Steps
     public function rules()
     {
         return [
+		    
             [['id'], 'integer'],
             [['title_item', 'description', 'image'], 'safe'],
         ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\backend\models;
+namespace vendor\landing\partner\models;
 
 use Yii;
 
@@ -17,6 +17,8 @@ class Steps extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+	public $img;
+	
     public static function tableName()
     {
         return 'steps';
@@ -37,6 +39,7 @@ class Steps extends \yii\db\ActiveRecord
     {
         return [
             [['description'], 'string'],
+			[['img'], 'file', 'extensions' => 'png', 'jpg'],
             [['title_item'], 'string', 'max' => 30],
             [['image'], 'string', 'max' => 50],
         ];
@@ -54,4 +57,10 @@ class Steps extends \yii\db\ActiveRecord
             'image' => 'Image',
         ];
     }
+	
+	public function upload($path)
+    {
+		$this->image = $path;
+		return true;
+		}
 }

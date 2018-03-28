@@ -28,9 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'logo_image',
-            'description:ntext',
+
+             [
+
+                'label' => 'Логотип',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::img(Url::toRoute($data->logo_image),[
+
+                        'style' => 'width:50px;height:50px'
+                    ]);
+                },
+            ],
         ],
     ]) ?>
 

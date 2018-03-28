@@ -134,7 +134,12 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
 										    [
                                                 'label' => 'Portfolio', 'url' => ['/partner/portfolio'],
                                             ],
-
+                                            [
+                                                'label' => 'Logo', 'url' => ['/partner/logo'],
+                                            ],
+											[
+                                                'label' => 'Steps', 'url' => ['/partner/steps'],
+                                            ],
                                             /* [
                                                 "label" => "Second level 2",
                                                 "url" => "#",

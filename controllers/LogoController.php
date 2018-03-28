@@ -1,14 +1,14 @@
 <?php
 
-namespace backend\controllers\landing;
+namespace vendor\landing\partner\controllers;
 
 use Yii;
-use backend\models\landing\Logo;
-use backend\models\landing\search\Logo as LogoSearch;
+use vendor\landing\partner\models\Logo;
+use vendor\landing\partner\models\search\LogoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
 /**
  * LogoController implements the CRUD actions for Logo model.
  */
@@ -67,13 +67,31 @@ class LogoController extends Controller
     {
         $model = new Logo();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        if ($model->load(Yii::$app->request->post())) {
+
+            $uploadedFile = UploadedFile::getInstance($model, 'img');
+
+            if ($uploadedFile !== null) {
+                $path = 'images/Logo/'
+                    . Yii::$app->security->generateRandomString()
+                    . '.' . $uploadedFile->extension;
+                
+                if ($model->validate()) {
+                    $model->upload($path);
+					
+                    $uploadedFile->saveAs('partner/' . $path);
+                }
+            }
+            if ($model->save()) {
+
+               return $this->redirect(['view', 'id' => $model->id]);
+
+            }
+        }            
 
         return $this->render('create', [
-            'model' => $model,
-        ]);
+            'model' => $model
+            ]);
     }
 
     /**
@@ -86,11 +104,26 @@ class LogoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        
+        if ($model->load(Yii::$app->request->post())){
+			
+			$uploadedFile = UploadedFile::getInstance($model, 'img');
+			if ($uploadedFile !== null) {
+                $path = 'images/Logo/'
+                    . Yii::$app->security->generateRandomString()
+                    . '.' . $uploadedFile->extension;
+                
+                if ($model->validate()) {
+                    $model->upload($path);
+                    $uploadedFile->saveAs('partner/' . $path);
+                }
+            }
+			
+			
+		 if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+        }
         return $this->render('update', [
             'model' => $model,
         ]);

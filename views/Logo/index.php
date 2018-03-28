@@ -25,11 +25,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            [
 
-            'id',
-            'logo_image',
-            'description:ntext',
+                'label' => 'Логотип',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::img(Url::toRoute($data->logo_image),[
 
+                        'style' => 'width:50px;height:50px'
+                    ]);
+                },
+            ],
+			
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

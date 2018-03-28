@@ -29,7 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title_item',
             'description:ntext',
-            'image',
+            
+            [
+			  'label' => 'image',
+			  'format' => 'raw',
+			  'value' => function($data){
+				  
+				  return Html::img(Url::toRoute($data->image),
+				  [
+				  'style' => 'width:50px;height:50px'
+				  ]);
+			  }
+			
+			],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
