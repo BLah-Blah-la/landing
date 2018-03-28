@@ -16,6 +16,13 @@ use vendor\landing\partner\models\Customers;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 	
+	<?= $form->field($model, 'phone_digital')->widget(\yii\widgets\MaskedInput::className(), [
+			'mask' => '+7(999) 999 99 99',
+			'clientOptions' => [
+			   'removeMaskOnSubmit' => true,
+			]
+        ]) ?>
+	
 	<?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
 	
 	<?= $form->field($model, 'email')?>
@@ -26,13 +33,7 @@ use vendor\landing\partner\models\Customers;
 	
 	<?= $form->field($model, 'ava')->fileInput()->label('Заменить картинку')?>
 	
-    <?= $form->field($model, 'phone_digital')->widget(\yii\widgets\MaskedInput::className(), [
-			'mask' => '+7(999) 999 99 99',
-			'clientOptions' => [
-			   'removeMaskOnSubmit' => true,
-			]
-        ]) ?>
-
+    
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

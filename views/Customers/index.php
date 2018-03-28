@@ -46,11 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Аватар',
                 'format' => 'raw',
                 'value' => function($data){
+					if($data->avatar !== NULL){
                     return Html::img(Url::toRoute($data->avatar),[
                         'alt'=>'yii2 - картинка в gridview',
                         'style' => 'width:50px;height:50px'
                     ]);
-                },
+                 }
+				},
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],

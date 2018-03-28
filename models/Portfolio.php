@@ -70,7 +70,7 @@ class Portfolio extends \yii\db\ActiveRecord
 		->select(['id', 'email'])
 		->all();
 		
-		$data = ArrayHelper::map($customers, 'id', 'email');
+		$data = ArrayHelper::map($customers, 'id', 'phone_digital');
 		
 		return $data;
 		

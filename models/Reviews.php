@@ -65,10 +65,10 @@ class Reviews extends \yii\db\ActiveRecord
 		
 		$customers = 
 		Customers::find()
-		->select(['id', 'email'])
+		->select(['id', 'phone_digital'])
 		->all();
 		
-		$data = ArrayHelper::map($customers, 'id', 'email');
+		$data = ArrayHelper::map($customers, 'id', 'phone_digital');
 		
 		return $data;
 		
