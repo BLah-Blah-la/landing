@@ -67,7 +67,7 @@ class Portfolio extends \yii\db\ActiveRecord
 		
 		$customers = 
 		Customers::find()
-		->select(['id', 'email'])
+		->select(['id', 'phone_digital'])
 		->all();
 		
 		$data = ArrayHelper::map($customers, 'id', 'phone_digital');
