@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-             'header'=>'Действия', 
+             'header'=>'Действия',
             'headerOptions' => ['width' => '80'],
             'template' => '{view} {update} {delete}{link}',
 

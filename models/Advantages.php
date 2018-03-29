@@ -22,7 +22,14 @@ class Advantages extends \yii\db\ActiveRecord
     {
         return 'advantages';
     }
-
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
     /**
      * @return \yii\db\Connection the database connection used by this AR class.
      */

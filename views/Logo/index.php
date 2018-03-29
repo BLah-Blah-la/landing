@@ -24,8 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'options' => ['style' => 'width: 200px; max-width: 200px;', 'class'=> 'col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3'],
+        
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+		
+            ['class' => 'yii\grid\SerialColumn',
+			   'header' => '#',
+			
+			],
             [
 
                 'label' => 'Логотип',
@@ -33,12 +39,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($data){
                     return Html::img(Url::toRoute($data->logo_image),[
 
-                        'style' => 'width:50px;height:50px'
+                        'style' => 'width:250px;height:250px'
                     ]);
                 },
+				
+			    'contentOptions' => ['style' => 'width:170px;color:red'],
             ],
-			
-            ['class' => 'yii\grid\ActionColumn'],
+			['class' => 'yii\grid\ActionColumn',
+                'header'=>'Действия',
+                'headerOptions' => ['width' => '80'],
+                'template' => '{view} {update} {delete}{link}',
+/* 				'contentOptions' => ['style' => 'width:70px;color:red', ], */
+            ],
+
         ],
     ]); ?>
     <?php Pjax::end(); ?>

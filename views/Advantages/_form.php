@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Advantages */
@@ -14,8 +15,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
     
-	<?= $form->field($model, 'img')->fileInput()->label('Заменить картинку')?>
-
+	<?= $form->field($model, 'img')->widget(FileInput::classname(), [
+    'options' => ['accept' => 'image/*']])?>
+    <?php
+	
+	/* echo '<label class="control-label">Add Attachments</label>';
+    echo FileInput::widget([
+    'model' => $model,
+    'attribute' => 'img',
+    'options' => ['multiple' => true]]);
+	 */
+	?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
