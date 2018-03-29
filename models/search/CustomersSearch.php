@@ -24,7 +24,7 @@ class CustomersSearch extends Customers
     public function rules()
     {
         return [
-            [['id', 'price_name', 'declared_in'], 'integer'],
+            [['id', 'price_name', 'created_at', 'updated_at'], 'integer'],
             [['name', 'surname', 'name_company', 'status', 'avatar', 'phone_digital'], 'safe'],
 			[['email'], 'email'],
 			[['price.name'], 'safe'],

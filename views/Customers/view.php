@@ -39,8 +39,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone_digital',
             'status',
             [
-            'attribute'=>'declared_in',
+            'attribute'=>'created_at',
             'label'=>'Подал заявку',
+            'format' =>  ['date', 'HH:mm:ss dd.MM.Y'], // Доступные модификаторы - date:datetime:time
+            'headerOptions' => ['width' => '200'],
+            ],
+			[
+            'attribute'=>'updated_at',
+            'label'=>'Обновление',
             'format' =>  ['date', 'HH:mm:ss dd.MM.Y'], // Доступные модификаторы - date:datetime:time
             'headerOptions' => ['width' => '200'],
             ],

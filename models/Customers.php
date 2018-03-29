@@ -5,6 +5,7 @@ namespace vendor\landing\partner\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 use vendor\landing\partner\models\PriceList;
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "customers".
  *
@@ -49,7 +50,7 @@ class Customers extends \yii\db\ActiveRecord
     {
         return [
 		    [['ava'], 'file', 'extensions' => 'png, jpg'],
-            [['price_name', 'declared_in'], 'integer'],
+            [['price_name', 'created_at', 'updated_at'], 'integer'],
             [['name', 'surname', 'email', 'name_company', 'status', 'avatar'], 'string', 'max' => 255],
             [['phone_digital'], 'string', 'max' => 10],
             [['price_name'], 'exist', 'skipOnError' => true, 'targetClass' => PriceList::className(), 'targetAttribute' => ['price_name' => 'id']],
@@ -59,6 +60,12 @@ class Customers extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+	public function behaviors(){
+		return [
+		TimestampBehavior::className(),
+		];
+		}
+		
     public function attributeLabels()
     {
         return [
@@ -111,7 +118,8 @@ class Customers extends \yii\db\ActiveRecord
         return $this->hasOne(Reviews::className(), ['id_customer' => 'id']);
 		
     }
-	public function beforeSave($insert){
+	
+	/* public function beforeSave($insert){
 		if(parent::beforeSave($insert)){
 			
 			$this->declared_in = time();
@@ -122,7 +130,7 @@ class Customers extends \yii\db\ActiveRecord
 			
 			return false;
 		}
-	}
+	} */
 	public function upload($path)
 	{
 		$this->avatar = $path;
