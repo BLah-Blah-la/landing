@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\helpers\Url;
-
+use backend\models\get;
 /**
  * AdvantagesController implements the CRUD actions for Advantages model.
  */
@@ -19,7 +19,8 @@ class AdvantagesController extends Controller
     /**
      * @inheritdoc
      */
-    public $layout = "main";
+	const EVENT_AFTER_LOGIN = 'afterAction';
+/*     public $layout = "oos"; */
     public function behaviors()
     {
         return [
@@ -55,7 +56,12 @@ class AdvantagesController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+         $Fo = new get();
+               $Fo->on(self::EVENT_AFTER_LOGIN, 'function_name', 'abc');
+         
+               function function_name($event) {
+               echo $event->data;}
+		return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -85,7 +91,7 @@ class AdvantagesController extends Controller
                 }
             }
             if ($model->save()) {
-
+              
                return $this->redirect(['view', 'id' => $model->id]);
 
             }

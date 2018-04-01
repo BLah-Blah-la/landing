@@ -6,6 +6,10 @@
 use yii\widgets\Menu;
 use yii\helpers\Html;
 use  backend\assets\AppAsset;
+use nirvana\showloading\ShowLoadingAsset;
+
+/* ShowLoadingAsset::register($this); */
+
 $bundle = yiister\gentelella\assets\Asset::register($this);
 ?>
 <?php $this->beginPage(); ?>
@@ -24,6 +28,10 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 
 </head>
 <body class="nav-<?= !empty($_COOKIE['menuIsCollapsed']) && $_COOKIE['menuIsCollapsed'] == 'true' ? 'sm' : 'md' ?>" >
@@ -36,7 +44,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
             <div class="left_col scroll-view">
 
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="/" class="site_title"><span>Adminka</span></a>
+                    <a href="/" class="site_title"><span>Partner</span></a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -63,7 +71,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                         \yiister\gentelella\widgets\Menu::widget(
                             [
                                 "items" => [
-                                    ["label" => "Home", "url" => "/admin", "icon" => "home"],
+                                    ["label" => "Home", "url" => "/admin", "icon" => "home", 'id' => 'addadadasdsadasd'],
                                    /*  ["label" => "Layout", "url" => ["site/layout"], "icon" => "files-o"],
                                     ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"], */
                                     [
@@ -229,7 +237,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                         <li role="presentation" class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-envelope-o"></i>
-                                <span class="badge bg-green">6</span>
+                                <span class="badge bg-green">1</span>
                             </a>
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                 <li>
@@ -286,6 +294,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
             <div class="clearfix"></div>
 
             <?= $content ?>
+	
         </div>
         <!-- /page content -->
         <!-- footer content -->

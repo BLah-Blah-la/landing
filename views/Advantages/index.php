@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
-
+use timurmelnikov\widgets\LoadingOverlayPjax;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\landing\search\AdvantagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -12,19 +12,28 @@ use yii\helpers\Url;
 $this->title = 'Advantages';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="advantages-index">
+
+
+<div class="advantages-index" id = "element">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <?php LoadingOverlayPjax::begin([
+                  'color'=> 'rgba(255, 255, 255, 0.6)',
+				  'fontawesome' => 'fa fa-spinner fa-spin',
+                  'elementOverlay' => '#element'
+    ]); ?>
     <p>
-        <?= Html::a('Create Advantages', ['create'], ['class' => 'btn btn-success']) ?>
+	
+        <?= Html::a('Create Advantages', ['create'], ['class' => 'btn btn-success', 'id' => 'element']) ?>
     </p>
+   <?php LoadingOverlayPjax::end(); ?>
    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+		'id' => 'element',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -35,10 +44,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Логотип',
                 'format' => 'raw',
                 'value' => function($data){
-                    return Html::img(Url::toRoute($data->logo),[
+                    return 
+					Html::a(
+					Html::img(Url::toRoute($data->logo),[
 
                         'style' => 'width:50px;height:50px'
-                    ]);
+                    ]),
+					/* 'url' => Html::img(Url::toRoute($data->logo),[
+
+                        'style' => 'width:150px;height:150px',
+                    ]), */
+					[$data->logo],
+					['data-fancybox' => 'gallery']
+				);
                 },
             ],
 
@@ -52,3 +70,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
     <?php Pjax::end(); ?>
 </div>
+	
