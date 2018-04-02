@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
 use timurmelnikov\widgets\LoadingOverlayPjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\landing\search\AdvantagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */

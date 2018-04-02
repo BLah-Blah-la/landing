@@ -17,7 +17,6 @@ class CallbackController extends Controller
     /**
      * @inheritdoc
      */
-	public $layout = "main";
     public function behaviors()
     {
         return [
