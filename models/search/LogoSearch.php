@@ -6,7 +6,6 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use vendor\landing\partner\models\Logo as LogoModel;
-use yii\helpers\ArrayHelper;
 
 /**
  * Logo represents the model behind the search form of `backend\models\landing\Logo`.
@@ -16,18 +15,13 @@ class LogoSearch extends LogoModel
     /**
      * @inheritdoc
      */
-	public function attributes(){
-		
-		return ArrayHelper::merge(parent::attributes(), ['price.name']);
-		
-	}
+	
     public function rules()
     {
         return [
 		    
             [['id'], 'integer'],
             [['logo_image'], 'safe'],
-			[['photo.file'], 'safe'],
         ];
     }
 

@@ -210,10 +210,11 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="/admin/user/profile">  Profile</a>
+                                <li><a href="javascript:;">  Profile</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/user/settings">
+                                    <a href="javascript:;">
+                                        <span class="badge bg-red pull-right">50%</span>
                                         <span>Settings</span>
                                     </a>
                                 </li>

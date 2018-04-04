@@ -5,7 +5,6 @@ namespace vendor\landing\partner\controllers;
 use Yii;
 use vendor\landing\partner\models\Logo;
 use vendor\landing\partner\models\search\LogoSearch;
-use vendor\landing\partner\models\Photo;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -18,6 +17,7 @@ class LogoController extends Controller
     /**
      * @inheritdoc
      */
+	public $layout = "main";
     public function behaviors()
     {
         return [
@@ -150,16 +150,6 @@ class LogoController extends Controller
      * @return Logo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-	
-	public function getPhoto()
-    {
-        return $this->hasMany(Photo::className(),
-            [
-                'object_id' => 'id',
-                'type' => 'avatar_label',
-            ])->andWhere(['deleted' => 0]);
-    }
-	
     protected function findModel($id)
     {
         if (($model = Logo::findOne($id)) !== null) {

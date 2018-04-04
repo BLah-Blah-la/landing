@@ -17,6 +17,7 @@ class StepsController extends Controller
     /**
      * @inheritdoc
      */
+	public $layout = "main";
     public function behaviors()
     {
         return [

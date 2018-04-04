@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\models\landing\search\Logo */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Логотип';
+$this->title = 'Logos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="logo-index">
@@ -18,14 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Создать логотип', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Logo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'options' => ['class' => 'table-responsive'],
-        'tableOptions' => ['class' => 'table table-condensed'],
+        'options' => ['style' => 'width: 200px; max-width: 200px;', 'class'=> 'col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3'],
         
         'columns' => [
 		
@@ -38,19 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Логотип',
                 'format' => 'raw',
                 'value' => function($data){
-                    return Html::a(
-					Html::img(Url::toRoute($data->logo_image),[
+                    return Html::img(Url::toRoute($data->logo_image),[
 
-                        'style' => 'width:50px;height:50px',
-/* 						'class' => 'img-responsive', */
-                    ]),
-					/* 'url' => Html::img(Url::toRoute($data->logo),[
-
-                        'style' => 'width:150px;height:150px',
-                    ]), */
-					[$data->logo_image],
-					['data-fancybox' => 'gallery']
-				);
+                        'style' => 'width:250px;height:250px'
+                    ]);
                 },
 				
 			    'contentOptions' => ['style' => 'width:170px;color:red'],

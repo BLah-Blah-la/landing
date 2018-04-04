@@ -29,17 +29,7 @@ class Logo extends \yii\db\ActiveRecord
     {
         return Yii::$app->get('db2');
     }
-    function behaviors()
-    {
-        return [
-            'images' => [
-                'class' => 'dvizh\gallery\behaviors\AttachImages',
-                'mode' => 'gallery',
-                'quality' => 60,
-                'galleryId' => 'picture'
-            ],
-        ];
-    }
+
     /**
      * @inheritdoc
      */
