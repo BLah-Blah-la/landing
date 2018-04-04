@@ -18,7 +18,6 @@ class ReviewsController extends Controller
     /**
      * @inheritdoc
      */
-	public $layout = "main";
     public function behaviors()
     {
         return [
@@ -71,7 +70,7 @@ class ReviewsController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $uploadedFile = UploadedFile::getInstance($model, 'image');
+            $uploadedFile = UploadedFile::getInstance($model, 'img');
 
             if ($uploadedFile !== null) {
                 $path = 'images/Reviews/'
@@ -108,7 +107,7 @@ class ReviewsController extends Controller
         
         if ($model->load(Yii::$app->request->post())){
 			
-			$uploadedFile = UploadedFile::getInstance($model, 'image');
+			$uploadedFile = UploadedFile::getInstance($model, 'img');
 			if ($uploadedFile !== null) {
                 $path = 'images/Reviews/'
                     . Yii::$app->security->generateRandomString()

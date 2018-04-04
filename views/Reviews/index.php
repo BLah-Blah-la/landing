@@ -26,27 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            [
-                'label' => 'Avatar',
-                'format' => 'raw',
-                'value' => function($data){
-                    return Html::img(Url::toRoute($data->getAvatar()),[
-                        'style' => 'width:50px;height:50px'
-                    ]);
-                },
-            ],
 	
-            'customer.name',
-			'customer.surname',
-			'customer.status',
+            'name',
+			'surname',
+			'status',
             'text:ntext',
 
             [
-                'label' => 'Image',
+                'label' => 'image',
                 'format' => 'raw',
                 'value' => function($data){
-                    return Html::img(Url::toRoute($data->image_site),[
+                    return Html::img(Url::toRoute($data->image),[
                         'style' => 'width:50px;height:50px'
                     ]);
                 },

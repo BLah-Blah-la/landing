@@ -29,7 +29,6 @@ class Logo extends \yii\db\ActiveRecord
     {
         return Yii::$app->get('db2');
     }
-
     /**
      * @inheritdoc
      */

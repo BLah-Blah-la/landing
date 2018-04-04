@@ -5,6 +5,8 @@ namespace vendor\landing\partner\models;
 use Yii;
 use vendor\landing\partner\models\Customers;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
 /**
  * This is the model class for table "reviews".
  *
@@ -20,7 +22,7 @@ class Reviews extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
    	*/
-    public $image;
+    public $img;
 	
 	public static function tableName()
     {
@@ -41,11 +43,10 @@ class Reviews extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_customer'], 'integer'],
+
             [['text'], 'string'],
-			[['image'], 'file', 'extensions' => 'png, jpg'],
-            [['image_site'], 'string', 'max' => 255],
-            [['id_customer'], 'exist', 'skipOnError' => true, 'targetClass' => Customers::className(), 'targetAttribute' => ['id_customer' => 'id']],
+			[['img'], 'file', 'extensions' => 'png, jpg'],
+            [['image', 'name', 'surname', 'status'], 'string', 'max' => 255],
         ];
     }
 
@@ -56,41 +57,31 @@ class Reviews extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_customer' => 'Id Customer',
+			'name' => 'Name',
+			'surname' => 'Surname',
+			'status' => 'Status',
             'text' => 'Text',
-            'image_site' => 'Image Site',
+            'image' => 'Image',
         ];
     }
     public function customersList(){
 		
 		$customers = 
 		Customers::find()
-		->select(['id', 'phone_digital'])
+		->select(['id', 'avatar'])
 		->all();
-		
-		$data = ArrayHelper::map($customers, 'id', 'phone_digital');
+	
+		$data = ArrayHelper::map($customers, 'id', 'avatar');
 		
 		return $data;
 		
 	}
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCustomer()
-    {
-        return $this->hasOne(Customers::className(), ['id' => 'id_customer']);
-    }
 	
 	public function upload($path)
 	{
-		$this->image_site = $path;
+		$this->image = $path;
+		
 		return true;
 		
 		}
-    public function getAvatar(){
-		
-		$customer = $this->customer;
-		return $customer->avatar;
-		
-	}
 }

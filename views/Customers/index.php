@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-	    
+	    'options' => ['class' => 'table-responsive'],
+        'tableOptions' => ['class' => 'table table-condensed'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
              
@@ -41,19 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'name_company',
             'phone_digital',
             'status',
-            [
-                /* 'attribute' => 'logo', */
-                'label' => 'Аватар',
-                'format' => 'raw',
-                'value' => function($data){
-					if($data->avatar !== NULL){
-                    return Html::img(Url::toRoute($data->avatar),[
-                        'alt'=>'yii2 - картинка в gridview',
-                        'style' => 'width:50px;height:50px'
-                    ]);
-                 }
-				},
-            ],
+        
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

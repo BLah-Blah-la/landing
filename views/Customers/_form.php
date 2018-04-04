@@ -12,7 +12,7 @@ use vendor\landing\partner\models\Customers;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'price_name')->dropDownList(Customers::priceList())?>
+    <?= $form->field($model, 'price_name')->dropDownList(Customers::priceList(), Yii::$app->params['price_list'])?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 	

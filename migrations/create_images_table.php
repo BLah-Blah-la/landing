@@ -3,12 +3,11 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `customers`.
+ * Handles the creation of table `images`.
  * Has foreign keys to the tables:
  *
- * - `price_list`
  */
-class m180312_073754_create_customers_table extends Migration
+class m180312_073754_create_avatars_table extends Migration
 {
     /**
      * @inheritdoc

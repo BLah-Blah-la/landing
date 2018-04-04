@@ -17,7 +17,6 @@ class PortfolioController extends Controller
     /**
      * @inheritdoc
      */
-	public $layout = "main";
     public function behaviors()
     {
         return [
