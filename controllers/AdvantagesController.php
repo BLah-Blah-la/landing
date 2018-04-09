@@ -78,7 +78,7 @@ class AdvantagesController extends Controller
     public function actionCreate()
     {
         $model = new Advantages();
-
+         
         if ($model->load(Yii::$app->request->post())) {
 
             $uploadedFile = UploadedFile::getInstance($model, 'img');

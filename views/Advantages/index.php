@@ -69,13 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ],
         ],
-    ]); ?>
-<?php echo LinkPreview::widget([
-    'selector' => '#your-input-id or .someclass',
-    'clientOptions' => [
-        'previewActionUrl' => \yii\helpers\Url::to(['link-preview'])
-    ],
-])?>	
+    ]); ?>	
     <?php Pjax::end(); ?>
 </div>
 	
