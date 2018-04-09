@@ -12,6 +12,7 @@ use yii\web\UploadedFile;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use backend\models\get;
+use yii2mod\linkpreview\actions\LinkPreviewAction;
 /**
  * AdvantagesController implements the CRUD actions for Advantages model.
  */
@@ -33,7 +34,13 @@ class AdvantagesController extends Controller
             ],
         ];
     }
-
+    
+	public function actions(){
+		return [
+		'link-preview' => LinkPreviewAction::className()
+		];
+		}
+	
     /**
      * Lists all Advantages models.
      * @return mixed
