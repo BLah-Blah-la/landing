@@ -12,7 +12,7 @@ use vendor\landing\partner\models\Portfolio;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_customer')->dropDownList(Portfolio::customersList())?>
+    <?= $form->field($model, 'name_company')->textInput()?>
 
      <?= $form->field($model, 'image')->fileInput()->label('Заменить') ?>
 

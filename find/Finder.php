@@ -6,7 +6,8 @@ use vendor\landing\partner\models\Advantages;
 use vendor\landing\partner\models\Contacts;
 use vendor\landing\partner\models\Steps;
 use vendor\landing\partner\models\PriceList;
-
+use vendor\landing\partner\models\Portfolio;
+use vendor\landing\partner\models\Reviews;
 use yii\db\ActiveRecord;
 
 class Finder extends ActiveRecord
@@ -40,5 +41,17 @@ class Finder extends ActiveRecord
 		return PriceList::find()->all();
 		
 	}
+	public function findPortfolio(){
+		
+		return Portfolio::find()->all();
+		
+	}
+	
+	public function findReviews(){
+		
+		return Reviews::find()->all();
+		
+	}
+	
 }
 ?>

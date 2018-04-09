@@ -8,7 +8,6 @@ use yii\helpers\Url;
 use nirvana\showloading\ShowLoadingAsset;
 use timurmelnikov\widgets\LoadingOverlayPjax;
 
-ShowLoadingAsset::register($this);
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Advantages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -48,7 +47,8 @@ $('#my-content-panel-id').hideLoading();
                 'label' => 'Логотип',
                 'format' => 'raw',
                 'value' => function($data){
-                    return Html::img(Url::toRoute($data->logo),[
+                    
+					return Html::img(Url::toRoute($data->logo),[
 
                         'style' => 'width:50px;height:50px'
                     ]);

@@ -49,7 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
 					Html::a(
 					Html::img(Url::toRoute($data->logo),[
 
-                        'style' => 'width:50px;height:50px'
+                        'style' => 'width:50px;height:50px',
+						'id' => 'img',
                     ]),
 					/* 'url' => Html::img(Url::toRoute($data->logo),[
 
@@ -69,6 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ],
         ],
     ]); ?>
+	
     <?php Pjax::end(); ?>
 </div>
 	

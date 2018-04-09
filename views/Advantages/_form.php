@@ -17,7 +17,16 @@ use kartik\file\FileInput;
     
 	<?= $form->field($model, 'img')->widget(FileInput::classname(), [
     'options' => ['accept' => 'image/*']])?>
-    <?php
+	<?=\dvizh\gallery\widgets\Gallery::widget(
+    [
+        'model' => $model,
+        'previewSize' => '50x50',
+        'fileInputPluginLoading' => true,
+        'fileInputPluginOptions' => []
+    ]
+); ?>
+    
+	<?php
 	
 	/* echo '<label class="control-label">Add Attachments</label>';
     echo FileInput::widget([

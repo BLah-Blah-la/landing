@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 			
-            'customer.name_company',
+            'name_company',
             [
                 'label' => 'image',
                 'format' => 'raw',

@@ -41,9 +41,9 @@ class Portfolio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_customer'], 'integer'],
-            [['image_site'], 'string', 'max' => 255],
-            [['id_customer'], 'exist', 'skipOnError' => true, 'targetClass' => Customers::className(), 'targetAttribute' => ['id_customer' => 'id']],
+             
+            [['image_site', 'name_company'], 'string', 'max' => 255],
+       
         ];
     }
 
@@ -54,7 +54,7 @@ class Portfolio extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_customer' => 'Id Customer',
+            'name_company' => 'Name Company',
             'image_site' => 'Image Site',
         ];
     }

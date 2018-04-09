@@ -16,6 +16,18 @@ class Advantages extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+	
+	function behaviors()
+    {
+        return [
+            'images' => [
+                'class' => 'dvizh\gallery\behaviors\AttachImages',
+                'mode' => 'gallery',
+                'quality' => 2,
+                'galleryId' => 'picture'
+            ],
+        ];
+    }
 	public $img;
 	
     public static function tableName()

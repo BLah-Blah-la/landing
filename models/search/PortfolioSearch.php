@@ -25,9 +25,9 @@ class PortfolioSearch extends Portfolio
     public function rules()
     {
         return [
-            [['id', 'id_customer'], 'integer'],
-            [['image_site'], 'safe'],
-			[['customer.name_company'], 'safe'],
+            [['id'], 'integer'],
+            [['image_site', 'name_company'], 'safe'],
+
         ];
     }
 
@@ -52,10 +52,6 @@ class PortfolioSearch extends Portfolio
         $query = Portfolio::find();
 
         // add conditions that should always apply here
-        $query->joinWith( ['customer' => function($query) { 
-				$query->from(['customer' => 'customers']);
-			}
-		]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -67,17 +63,12 @@ class PortfolioSearch extends Portfolio
             // $query->where('0=1');
             return $dataProvider;
         }
-        $dataProvider->sort->attributes['customer.name_company'] = [
-		'asc' => ['customer.name_company' => SORT_ASC],
-		'desc' => ['customer.name_company' => SORT_DESC],
-		];
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
         ]);
          
-        $query->andFilterWhere(['like', 'id_customer', $this->id_customer])
-		      ->andFilterWhere(['like', 'customer.name_company', $this->getAttribute('customer.name_company')])
+        $query->andFilterWhere(['like', 'name_company', $this->name_company])
               ->andFilterWhere(['like', 'image_site', $this->image_site]);
 
         return $dataProvider;
