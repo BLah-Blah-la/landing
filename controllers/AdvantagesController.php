@@ -35,11 +35,11 @@ class AdvantagesController extends Controller
         ];
     }
     
-	public function actions(){
+/* 	public function actions(){
 		return [
 		'link-preview' => LinkPreviewAction::className()
 		];
-		}
+		} */
 	
     /**
      * Lists all Advantages models.
@@ -78,7 +78,8 @@ class AdvantagesController extends Controller
     public function actionCreate()
     {
         $model = new Advantages();
-         
+        $path_one = 'partner/images/Advantages/preview/';
+		$path_two = 'images/Advantages/preview/';
         if ($model->load(Yii::$app->request->post())) {
 
             $uploadedFile = UploadedFile::getInstance($model, 'img');
@@ -92,6 +93,7 @@ class AdvantagesController extends Controller
                     $model->upload($path);
 					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
             }
             if ($model->save()) {
@@ -116,22 +118,24 @@ class AdvantagesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if ($model->load(Yii::$app->request->post())){
-			
-			$uploadedFile = UploadedFile::getInstance($model, 'img');
-			if ($uploadedFile !== null) {
+        $path_one = 'partner/images/Advantages/preview/';
+		$path_two = 'images/Advantages/preview/';
+        if ($model->load(Yii::$app->request->post())) {
+
+            $uploadedFile = UploadedFile::getInstance($model, 'img');
+
+            if ($uploadedFile !== null) {
                 $path = 'images/Advantages/'
                     . Yii::$app->security->generateRandomString()
                     . '.' . $uploadedFile->extension;
                 
                 if ($model->validate()) {
                     $model->upload($path);
+					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
-            }
-			
-			
+            }	
 		 if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

@@ -3,7 +3,7 @@
 namespace vendor\landing\partner\models;
 
 use Yii;
-
+use backend\models\lopez;
 /**
  * This is the model class for table "advantages".
  *
@@ -17,17 +17,6 @@ class Advantages extends \yii\db\ActiveRecord
      * @inheritdoc
      */
 	
-	function behaviors()
-    {
-        return [
-            'images' => [
-                'class' => 'dvizh\gallery\behaviors\AttachImages',
-                'mode' => 'gallery',
-                'quality' => 2,
-                'galleryId' => 'picture'
-            ],
-        ];
-    }
 	public $img;
 	
     public static function tableName()
@@ -51,7 +40,7 @@ class Advantages extends \yii\db\ActiveRecord
         return [
             [['description'], 'string'],
 			[['img'], 'file', 'extensions' => 'png, jpg'],
-            [['logo'], 'string', 'max' => 255],
+            [['logo', 'preview'], 'string', 'max' => 255],
         ];
     }
 
@@ -66,10 +55,69 @@ class Advantages extends \yii\db\ActiveRecord
             'description' => 'Description',
         ];
     }
-	
 	public function upload($path)
     {
 		$this->logo = $path;
 		return true;
 		}
+		
+    public function savePreview($path, $path_one, $path_two){
+       $preview = new lopez();
+	   $this->preview = $preview->square_preview('partner/' . $path, 200, $path_one, $path_two);
+	   return true;
+	}
+	
+	public function beforeSave($insert){
+		
+		if(parent::beforeSave($insert)){
+			
+			$id = Yii::$app->request->get('id');
+			$i = (integer)0;
+			
+		    $one = Advantages::find()->select(['preview', 'logo'])->where(['id' => $id])->all();
+			
+			if($one[$i++]['preview'] || $one[$i++]['logo'] !== NULL):
+				
+				foreach($one as $var):
+				unlink('partner/' . $var->preview);
+				unlink('partner/' . $var->logo);
+				endforeach;
+				
+			endif;
+			
+			return true;
+			
+		} else {
+			
+			return false;
+		}
+	}
+	
+	
+	public function beforeDelete(){
+		
+		if(parent::beforeDelete()){
+			
+			$id = Yii::$app->request->get('id');
+		    $one = Advantages::find()->select(['preview', 'logo'])->where(['id' => $id])->all();
+			$i = (integer)0;
+			
+			if($one[$i++]['preview'] || $one[$i++]['logo'] !== NULL):
+			foreach($one as $var):
+			
+			unlink('partner/' . $var->preview);
+			unlink('partner/' . $var->logo);
+			
+			endforeach;
+			
+			endif;
+			
+			return true;
+		} else {
+				
+			return false;
+		}
+		
+		
+	}
 }

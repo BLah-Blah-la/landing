@@ -13,8 +13,6 @@ use yii2mod\linkpreview\LinkPreview;
 $this->title = 'Advantages';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-
 <div class="advantages-index" id = "element">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -47,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($data){
                     return 
 					Html::a(
-					Html::img(Url::toRoute($data->logo),[
+					Html::img(Url::toRoute($data->preview),[
 
                         'style' => 'width:50px;height:50px',
 						'id' => 'img',

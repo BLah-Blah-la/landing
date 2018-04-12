@@ -19,7 +19,7 @@ class AdvantagesSearch extends Advantages
     {
         return [
             [['id'], 'integer'],
-            [['logo', 'description'], 'safe'],
+            [['logo', 'description', 'preview'], 'safe'],
 			
         ];
     }
@@ -64,6 +64,7 @@ class AdvantagesSearch extends Advantages
         ]);
 
         $query->andFilterWhere(['like', 'logo', $this->logo])
+		    ->andFilterWhere(['like', 'preview', $this->preview])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

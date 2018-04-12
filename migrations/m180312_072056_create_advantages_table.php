@@ -15,6 +15,7 @@ class m180312_072056_create_advantages_table extends Migration
         $this->createTable('advantages', [
             'id' => $this->primaryKey(),
             'logo' => $this->string(255),
+			'preview' => $this->string(255),
             'description' => $this->text(),
         ]);
     }

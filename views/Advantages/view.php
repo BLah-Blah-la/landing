@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $model backend\models\landing\Advantages */
 use nirvana\showloading\ShowLoadingAsset;
 use timurmelnikov\widgets\LoadingOverlayPjax;
-
+use vendor\landing\partner\models\Advantages;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Advantages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -42,16 +42,25 @@ $('#my-content-panel-id').hideLoading();
         'attributes' => [
 
             'description:ntext',
-            [
+             [
                 /* 'attribute' => 'logo', */
                 'label' => 'Логотип',
                 'format' => 'raw',
                 'value' => function($data){
-                    
-					return Html::img(Url::toRoute($data->logo),[
+                    return 
+					Html::a(
+					Html::img(Url::toRoute($data->preview),[
 
-                        'style' => 'width:50px;height:50px'
-                    ]);
+                        'style' => 'width:50px;height:50px',
+						'id' => 'img',
+                    ]),
+					/* 'url' => Html::img(Url::toRoute($data->logo),[
+
+                        'style' => 'width:150px;height:150px',
+                    ]), */
+					[$data->logo],
+					['data-fancybox' => 'gallery']
+				);
                 },
             ],
 
