@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Orders', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('modules/notifications', 'Create Orders'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
      
     <?php /* $dataProviderList->pagination->pageParam = 'PriceListModel-page';

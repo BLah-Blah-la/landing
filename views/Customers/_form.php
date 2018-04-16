@@ -29,7 +29,12 @@ use vendor\landing\partner\models\Customers;
 	
 	<?= $form->field($model, 'name_company')->textInput(['maxlength' => true]) ?>
 	
-	<?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'status')->dropDownList([
+	    'Новый' => 'Новый',
+	    'В процессе разработки' => 'В процессе разработки',
+		'На рассмотрении' => 'На рассмотрении', 
+	    'Завершен' => 'Завершен',
+	], Yii::$app->params['status'])?>
 	
 	<?= $form->field($model, 'ava')->fileInput()->label('Заменить картинку')?>
 	

@@ -8,7 +8,8 @@ use vendor\landing\partner\models\search\PriceListSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
+use dektrium\user\filters\AccessRule;
 /**
  * PriceListController implements the CRUD actions for PriceList model.
  */
@@ -20,10 +21,22 @@ class PriceListController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['switch'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['Superadmin'],
+                    ],
                 ],
             ],
         ];

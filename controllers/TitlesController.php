@@ -8,7 +8,8 @@ use vendor\landing\partner\models\search\TitlesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
+use dektrium\user\filters\AccessRule;
 /**
  * TitlesController implements the CRUD actions for Titles model.
  */
@@ -20,10 +21,22 @@ class TitlesController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['switch'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['Superadmin'],
+                    ],
                 ],
             ],
         ];

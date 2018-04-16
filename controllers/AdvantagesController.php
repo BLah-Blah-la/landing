@@ -13,6 +13,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use backend\models\get;
 use yii2mod\linkpreview\actions\LinkPreviewAction;
+use yii\filters\AccessControl;
+use dektrium\user\filters\AccessRule;
 /**
  * AdvantagesController implements the CRUD actions for Advantages model.
  */
@@ -23,13 +25,25 @@ class AdvantagesController extends Controller
      */
 	const EVENT_AFTER_LOGIN = 'afterAction';
 
-    public function behaviors()
+   public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['switch'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['Superadmin'],
+                    ],
                 ],
             ],
         ];

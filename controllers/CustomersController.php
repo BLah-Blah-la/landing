@@ -11,7 +11,8 @@ use yii\filters\VerbFilter;
 use vendor\landing\partner\models\search\PriceListSearch;
 use yii\web\UploadedFile;
 use yii\helpers\Url;
-
+use yii\filters\AccessControl;
+use dektrium\user\filters\AccessRule;
 /**
  * OrderController implements the CRUD actions for Orders model.
  */
@@ -23,10 +24,22 @@ class CustomersController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['switch'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['Superadmin'],
+                    ],
                 ],
             ],
         ];
