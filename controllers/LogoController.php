@@ -89,7 +89,8 @@ class LogoController extends Controller
     public function actionCreate()
     {
         $model = new Logo();
-
+        $path_one = 'partner/images/Logo/preview/';
+		$path_two = 'images/Logo/preview/';
         if ($model->load(Yii::$app->request->post())) {
 
             $uploadedFile = UploadedFile::getInstance($model, 'img');
@@ -103,10 +104,11 @@ class LogoController extends Controller
                     $model->upload($path);
 					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
             }
             if ($model->save()) {
-
+              
                return $this->redirect(['view', 'id' => $model->id]);
 
             }
@@ -118,7 +120,7 @@ class LogoController extends Controller
     }
 
     /**
-     * Updates an existing Logo model.
+     * Updates an existing Contacts model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -127,22 +129,24 @@ class LogoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if ($model->load(Yii::$app->request->post())){
-			
-			$uploadedFile = UploadedFile::getInstance($model, 'img');
-			if ($uploadedFile !== null) {
+        $path_one = 'partner/images/Logo/preview/';
+		$path_two = 'images/Logo/preview/';
+        if ($model->load(Yii::$app->request->post())) {
+
+            $uploadedFile = UploadedFile::getInstance($model, 'img');
+
+            if ($uploadedFile !== null) {
                 $path = 'images/Logo/'
                     . Yii::$app->security->generateRandomString()
                     . '.' . $uploadedFile->extension;
                 
                 if ($model->validate()) {
                     $model->upload($path);
+					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
-            }
-			
-			
+            }	
 		 if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

@@ -5,12 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Callback */
 
-$this->title = Yii::t('app', 'Update Callback: ' . $model->name, [
-    'nameAttribute' => '' . $model->name,
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Callbacks'), 'url' => ['index']];
+$this->title = Yii::t('modules/notifications', 'Update');
+
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/notifications', 'Callbacks'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('modules/notifications', 'Update');
 ?>
 <div class="callback-update">
 

@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('modules/notifications', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('modules/notifications', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -30,38 +30,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             [
 			 'attribute' => 'price.name',
-			 'label' => 'price',
+			 'label' => Yii::t('modules/notifications', 'PriceList'),
 			],
             'name',
-			'surname',
 			'email',
-			'name_company',
             'phone_digital',
             'status',
             [
             'attribute'=>'created_at',
-            'label'=>'Подал заявку',
+            'label'=> Yii::t('modules/notifications', 'created_at'),
             'format' =>  ['date', 'HH:mm:ss dd.MM.Y'], // Доступные модификаторы - date:datetime:time
             'headerOptions' => ['width' => '200'],
             ],
 			[
             'attribute'=>'updated_at',
-            'label'=>'Обновление',
+            'label'=> Yii::t('modules/notifications', 'updated_at'),
             'format' =>  ['date', 'HH:mm:ss dd.MM.Y'], // Доступные модификаторы - date:datetime:time
             'headerOptions' => ['width' => '200'],
-            ],
-			[
-                /* 'attribute' => 'logo', */
-                'label' => 'Аватар',
-                'format' => 'raw',
-                'value' => function($data){
-					if($data->avatar !== NULL){
-                    return Html::img(Url::toRoute($data->avatar),[
-                        'alt'=>'yii2 - картинка в gridview',
-                        'style' => 'width:50px;height:50px'
-                    ]);
-                 }
-				},
             ],
         ],
     ]) ?>

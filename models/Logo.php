@@ -1,8 +1,8 @@
 <?php
 
 namespace vendor\landing\partner\models;
-
 use Yii;
+use backend\models\lopez;
 
 /**
  * This is the model class for table "logo".
@@ -47,7 +47,8 @@ class Logo extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'logo_image' => 'Logo Image',
+			'img' => Yii::t('modules/notifications', 'img'),
+            'logo_image' => Yii::t('modules/notifications', 'Image'),
         ];
     }
 	
@@ -56,4 +57,65 @@ class Logo extends \yii\db\ActiveRecord
 		$this->logo_image = $path;
 		return true;
 		}
+	
+	
+	public function savePreview($path, $path_one, $path_two){
+       $preview = new lopez();
+	   $this->preview = $preview->square_preview('partner/' . $path, 200, $path_one, $path_two);
+	   return true;
+	}
+	
+	public function beforeSave($insert){
+		
+		if(parent::beforeSave($insert)){
+			
+			$id = Yii::$app->request->get('id');
+			$i = (integer)0;
+			
+		    $one = Logo::find()->select(['preview', 'logo_image'])->where(['id' => $id])->all();
+			
+			if($one[$i++]['preview'] || $one[$i++]['logo_image'] !== NULL):
+				
+				foreach($one as $var):
+				unlink('partner/' . $var->preview);
+				unlink('partner/' . $var->logo_image);
+				endforeach;
+				
+			endif;
+			
+			return true;
+			
+		} else {
+			
+			return false;
+		}
+	}
+	
+	
+	public function beforeDelete(){
+		
+		if(parent::beforeDelete()){
+			
+			$id = Yii::$app->request->get('id');
+		    $one = Logo::find()->select(['preview', 'logo_image'])->where(['id' => $id])->all();
+			$i = (integer)0;
+			
+			if($one[$i++]['preview'] || $one[$i++]['logo_image'] !== NULL):
+			foreach($one as $var):
+			
+			unlink('partner/' . $var->preview);
+			unlink('partner/' . $var->logo_image);
+			
+			endforeach;
+			
+			endif;
+			
+			return true;
+		} else {
+				
+			return false;
+		}
+		
+		
+	}	
 }

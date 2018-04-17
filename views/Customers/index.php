@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\models\landing */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Orders';
+$this->title = Yii::t('modules/notifications', 'Customers');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="orders-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('modules/notifications', 'Create Orders'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('modules/notifications', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
      
     <?php /* $dataProviderList->pagination->pageParam = 'PriceListModel-page';
@@ -34,12 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
              
             [
 			 'attribute' => 'price.name',
-			 'label' => 'price',
+			 'label' => Yii::t('modules/notifications', 'PriceList'),
 			],
             'name',
-			'surname',
 			'email',
-			'name_company',
             'phone_digital',
             'status',
         

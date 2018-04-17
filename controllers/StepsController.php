@@ -79,7 +79,8 @@ class StepsController extends Controller
     public function actionCreate()
     {
         $model = new Steps();
-
+        $path_one = 'partner/images/Steps/preview/';
+		$path_two = 'images/Steps/preview/';
         if ($model->load(Yii::$app->request->post())) {
 
             $uploadedFile = UploadedFile::getInstance($model, 'img');
@@ -93,10 +94,11 @@ class StepsController extends Controller
                     $model->upload($path);
 					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
             }
             if ($model->save()) {
-
+              
                return $this->redirect(['view', 'id' => $model->id]);
 
             }
@@ -108,7 +110,7 @@ class StepsController extends Controller
     }
 
     /**
-     * Updates an existing Steps model.
+     * Updates an existing Contacts model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -117,22 +119,24 @@ class StepsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if ($model->load(Yii::$app->request->post())){
-			
-			$uploadedFile = UploadedFile::getInstance($model, 'img');
-			if ($uploadedFile !== null) {
+        $path_one = 'partner/images/Steps/preview/';
+		$path_two = 'images/Steps/preview/';
+        if ($model->load(Yii::$app->request->post())) {
+
+            $uploadedFile = UploadedFile::getInstance($model, 'img');
+
+            if ($uploadedFile !== null) {
                 $path = 'images/Steps/'
                     . Yii::$app->security->generateRandomString()
                     . '.' . $uploadedFile->extension;
                 
                 if ($model->validate()) {
                     $model->upload($path);
+					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
-            }
-			
-			
+            }	
 		 if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

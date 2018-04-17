@@ -7,8 +7,8 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Reviews */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Reviews', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/notifications', 'Reviews'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('modules/notifications','Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('modules/notifications','Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -40,12 +40,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'text:ntext',
 
             [
-                'label' => 'image',
+                /* 'attribute' => 'logo', */
+                'label' => Yii::t('modules/notifications',  'Image'),
                 'format' => 'raw',
                 'value' => function($data){
-                    return Html::img(Url::toRoute($data->image),[
-                        'style' => 'width:50px;height:50px'
-                    ]);
+                    return 
+					Html::a(
+					Html::img(Url::toRoute($data->preview),[
+
+                        'style' => 'width:50px;height:50px',
+						'id' => 'img',
+                    ]),
+					/* 'url' => Html::img(Url::toRoute($data->logo),[
+
+                        'style' => 'width:150px;height:150px',
+                    ]), */
+					[$data->image],
+					['data-fancybox' => 'gallery']
+				);
                 },
             ],
   

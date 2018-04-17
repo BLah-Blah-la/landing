@@ -3,7 +3,7 @@
 namespace vendor\landing\partner\models;
 
 use Yii;
-
+use backend\models\lopez;
 /**
  * This is the model class for table "steps".
  *
@@ -52,9 +52,10 @@ class Steps extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title_item' => 'Title Item',
-            'description' => 'Description',
-            'image' => 'Image',
+            'title_item' => Yii::t('modules/notifications', 'Title Item'),
+            'description' => Yii::t('modules/notifications', 'Description'),
+            'image' => Yii::t('modules/notifications', 'Image'),
+			'img' => Yii::t('modules/notifications', 'Image'),
         ];
     }
 	
@@ -63,4 +64,64 @@ class Steps extends \yii\db\ActiveRecord
 		$this->image = $path;
 		return true;
 		}
+	
+	public function savePreview($path, $path_one, $path_two){
+       $preview = new lopez();
+	   $this->preview = $preview->square_preview('partner/' . $path, 200, $path_one, $path_two);
+	   return true;
+	}
+	
+	public function beforeSave($insert){
+		
+		if(parent::beforeSave($insert)){
+			
+			$id = Yii::$app->request->get('id');
+			$i = (integer)0;
+			
+		    $one = Steps::find()->select(['preview', 'image'])->where(['id' => $id])->all();
+			
+			if($one[$i++]['preview'] || $one[$i++]['image'] !== NULL):
+				
+				foreach($one as $var):
+				unlink('partner/' . $var->preview);
+				unlink('partner/' . $var->image);
+				endforeach;
+				
+			endif;
+			
+			return true;
+			
+		} else {
+			
+			return false;
+		}
+	}
+	
+	
+	public function beforeDelete(){
+		
+		if(parent::beforeDelete()){
+			
+			$id = Yii::$app->request->get('id');
+		    $one = Steps::find()->select(['preview', 'image'])->where(['id' => $id])->all();
+			$i = (integer)0;
+			
+			if($one[$i++]['preview'] || $one[$i++]['image'] !== NULL):
+			foreach($one as $var):
+			
+			unlink('partner/' . $var->preview);
+			unlink('partner/' . $var->image);
+			
+			endforeach;
+			
+			endif;
+			
+			return true;
+		} else {
+				
+			return false;
+		}
+		
+		
+	}
 }

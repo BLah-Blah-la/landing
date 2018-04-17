@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Reviews */
 
-$this->title = 'Update Reviews: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Reviews', 'url' => ['index']];
+$this->title = Yii::t('modules/notifications', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/notifications', 'Reviews'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

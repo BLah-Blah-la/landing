@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\models\landing\search\PortfolioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Portfolios';
+$this->title = Yii::t('modules/notifications', 'Portfolio');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="portfolio-index">
@@ -18,23 +18,37 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Portfolio', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('modules/notifications', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+		'options' => ['class' => 'table-responsive'],
+        'tableOptions' => ['class' => 'table table-condensed'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 			
             'name_company',
-            [
-                'label' => 'image',
+			[
+                /* 'attribute' => 'logo', */
+                'label' => Yii::t('modules/notifications',  'Image'),
                 'format' => 'raw',
                 'value' => function($data){
-                    return Html::img(Url::toRoute($data->image_site),[
-                        'style' => 'width:50px;height:50px'
-                    ]);
+                    return 
+					Html::a(
+					Html::img(Url::toRoute($data->preview),[
+
+                        'style' => 'width:50px;height:50px',
+						'id' => 'img',
+                    ]),
+					/* 'url' => Html::img(Url::toRoute($data->logo),[
+
+                        'style' => 'width:150px;height:150px',
+                    ]), */
+					[$data->image_site],
+					['data-fancybox' => 'gallery']
+				);
                 },
             ],
 			

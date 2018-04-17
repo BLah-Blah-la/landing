@@ -77,10 +77,11 @@ class ContactsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-        public function actionCreate()
+    public function actionCreate()
     {
         $model = new Contacts();
-
+        $path_one = 'partner/images/Contacts/preview/';
+		$path_two = 'images/Contacts/preview/';
         if ($model->load(Yii::$app->request->post())) {
 
             $uploadedFile = UploadedFile::getInstance($model, 'img');
@@ -94,10 +95,11 @@ class ContactsController extends Controller
                     $model->upload($path);
 					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
             }
             if ($model->save()) {
-
+              
                return $this->redirect(['view', 'id' => $model->id]);
 
             }
@@ -118,22 +120,24 @@ class ContactsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if ($model->load(Yii::$app->request->post())){
-			
-			$uploadedFile = UploadedFile::getInstance($model, 'img');
-			if ($uploadedFile !== null) {
+        $path_one = 'partner/images/Contacts/preview/';
+		$path_two = 'images/Contacts/preview/';
+        if ($model->load(Yii::$app->request->post())) {
+
+            $uploadedFile = UploadedFile::getInstance($model, 'img');
+
+            if ($uploadedFile !== null) {
                 $path = 'images/Contacts/'
                     . Yii::$app->security->generateRandomString()
                     . '.' . $uploadedFile->extension;
                 
                 if ($model->validate()) {
                     $model->upload($path);
+					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
-            }
-			
-			
+            }	
 		 if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

@@ -23,24 +23,19 @@ use vendor\landing\partner\models\Customers;
 			]
         ]) ?>
 	
-	<?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
 	
 	<?= $form->field($model, 'email')?>
 	
-	<?= $form->field($model, 'name_company')->textInput(['maxlength' => true]) ?>
 	
 	<?= $form->field($model, 'status')->dropDownList([
-	    'Новый' => 'Новый',
-	    'В процессе разработки' => 'В процессе разработки',
-		'На рассмотрении' => 'На рассмотрении', 
-	    'Завершен' => 'Завершен',
+	    Yii::t('modules/notifications', 'New') => Yii::t('modules/notifications', 'New'),
+	    Yii::t('modules/notifications', 'On development stage') =>  Yii::t('modules/notifications', 'В процессе разработки'),
+		Yii::t('modules/notifications', 'Under consideration') =>  Yii::t('modules/notifications', 'Under consideration'), 
+	    Yii::t('modules/notifications', 'Finished') =>  Yii::t('modules/notifications', 'Finished'),
 	], Yii::$app->params['status'])?>
-	
-	<?= $form->field($model, 'ava')->fileInput()->label('Заменить картинку')?>
-	
     
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('modules/notifications', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

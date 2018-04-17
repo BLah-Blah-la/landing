@@ -5,6 +5,7 @@ namespace vendor\landing\partner\models;
 use Yii;
 use vendor\landing\partner\models\Customers;
 use yii\helpers\ArrayHelper;
+use backend\models\lopez;
 
 /**
  * This is the model class for table "portfolio".
@@ -41,7 +42,7 @@ class Portfolio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-             
+            [['image'], 'file', 'extensions' => 'png, jpg'], 
             [['image_site', 'name_company'], 'string', 'max' => 255],
        
         ];
@@ -54,8 +55,9 @@ class Portfolio extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name_company' => 'Name Company',
-            'image_site' => 'Image Site',
+            'name_company' => Yii::t('modules/notifications', 'Name Company'),
+            'image_site' => Yii::t('modules/notifications', 'Image'),
+			'image' => Yii::t('modules/notifications', 'Image'),
         ];
     }
 
@@ -95,5 +97,65 @@ class Portfolio extends \yii\db\ActiveRecord
 		
 		return $customer->avatar;
 		
+		
 	}
+	public function savePreview($path, $path_one, $path_two){
+       $preview = new lopez();
+	   $this->preview = $preview->square_preview('partner/' . $path, 200, $path_one, $path_two);
+	   return true;
+	}
+	
+	public function beforeSave($insert){
+		
+		if(parent::beforeSave($insert)){
+			
+			$id = Yii::$app->request->get('id');
+			$i = (integer)0;
+			
+		    $one = Portfolio::find()->select(['preview', 'image_site'])->where(['id' => $id])->all();
+			
+			if($one[$i++]['preview'] || $one[$i++]['image_site'] !== NULL):
+				
+				foreach($one as $var):
+				unlink('partner/' . $var->preview);
+				unlink('partner/' . $var->image_site);
+				endforeach;
+				
+			endif;
+			
+			return true;
+			
+		} else {
+			
+			return false;
+		}
+	}
+	
+	
+	public function beforeDelete(){
+		
+		if(parent::beforeDelete()){
+			
+			$id = Yii::$app->request->get('id');
+		    $one = Portfolio::find()->select(['preview', 'image_site'])->where(['id' => $id])->all();
+			$i = (integer)0;
+			
+			if($one[$i++]['preview'] || $one[$i++]['image_site'] !== NULL):
+			foreach($one as $var):
+			
+			unlink('partner/' . $var->preview);
+			unlink('partner/' . $var->image_site);
+			
+			endforeach;
+			
+			endif;
+			
+			return true;
+		} else {
+				
+			return false;
+		}
+		
+		
+	}	
 }

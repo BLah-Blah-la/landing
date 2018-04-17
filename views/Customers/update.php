@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Orders */
 
-$this->title = 'Update Orders: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
+$this->title = Yii::t('modules/notifications', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/notifications', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

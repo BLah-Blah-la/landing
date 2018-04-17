@@ -51,8 +51,9 @@ class Advantages extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+			'img' => Yii::t('modules/notifications', 'Image'),
             'logo' => Yii::t('modules/notifications', 'Logo'),
-            'description' => ii::t('modules/notifications', 'Description'),
+            'description' => Yii::t('modules/notifications', 'Description'),
         ];
     }
 	public function upload($path)

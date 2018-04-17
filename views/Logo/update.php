@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Logo */
 
-$this->title = 'Update Logo: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Logos', 'url' => ['index']];
+$this->title = Yii::t('modules/notifications', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/notifications', 'Logos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

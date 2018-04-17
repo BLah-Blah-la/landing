@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\landing\search\TitlesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Titles';
+$this->title = Yii::t('modules/notifications', 'Titles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="titles-index">
@@ -17,12 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Titles', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('modules/notifications', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+		'options' => ['class' => 'table-responsive'],
+        'tableOptions' => ['class' => 'table table-condensed'],
+		
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

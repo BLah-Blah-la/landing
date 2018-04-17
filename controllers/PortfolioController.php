@@ -79,7 +79,8 @@ class PortfolioController extends Controller
     public function actionCreate()
     {
         $model = new Portfolio();
-
+        $path_one = 'partner/images/Portfolio/preview/';
+		$path_two = 'images/Portfolio/preview/';
         if ($model->load(Yii::$app->request->post())) {
 
             $uploadedFile = UploadedFile::getInstance($model, 'image');
@@ -93,14 +94,15 @@ class PortfolioController extends Controller
                     $model->upload($path);
 					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
             }
             if ($model->save()) {
-
+              
                return $this->redirect(['view', 'id' => $model->id]);
 
             }
-        }
+        }            
 
         return $this->render('create', [
             'model' => $model
@@ -108,7 +110,7 @@ class PortfolioController extends Controller
     }
 
     /**
-     * Updates an existing Portfolio model.
+     * Updates an existing Contacts model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -117,22 +119,24 @@ class PortfolioController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if ($model->load(Yii::$app->request->post())){
-			
-			$uploadedFile = UploadedFile::getInstance($model, 'image');
-			if ($uploadedFile !== null) {
+        $path_one = 'partner/images/Portfolio/preview/';
+		$path_two = 'images/Portfolio/preview/';
+        if ($model->load(Yii::$app->request->post())) {
+
+            $uploadedFile = UploadedFile::getInstance($model, 'image');
+
+            if ($uploadedFile !== null) {
                 $path = 'images/Portfolio/'
                     . Yii::$app->security->generateRandomString()
                     . '.' . $uploadedFile->extension;
                 
                 if ($model->validate()) {
                     $model->upload($path);
+					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
-            }
-			
-			
+            }	
 		 if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

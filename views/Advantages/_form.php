@@ -15,7 +15,7 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
     
-	<?= $form->field($model, 'img')->widget(FileInput::classname(), [
+	<?= $form->field($model, 'image')->widget(FileInput::classname(), [
     'options' => ['accept' => 'image/*']])?>
     
 	<?php
@@ -28,7 +28,7 @@ use kartik\file\FileInput;
 	 */
 	?>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('modules/notifications', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

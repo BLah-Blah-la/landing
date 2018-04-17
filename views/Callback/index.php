@@ -18,12 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Callback'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('modules/notifications', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+		'options' => ['class' => 'table-responsive'],
+        'tableOptions' => ['class' => 'table table-condensed'],
+		
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

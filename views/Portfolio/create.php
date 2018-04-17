@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Portfolio */
 
-$this->title = 'Create Portfolio';
+$this->title = Yii::t('modules/notifications', 'Create');
 $this->params['breadcrumbs'][] = ['label' => 'Portfolios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

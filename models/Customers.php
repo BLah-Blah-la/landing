@@ -73,14 +73,14 @@ class Customers extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'price_name' => 'Price Name',
-            'name' => 'Name',
-            'email' => 'Email',
-            'phone_digital' => 'Phone Digital',
-            'declared_in' => 'Declared In',
-            'name_company' => 'Name Company',
-            'status' => 'Status',
-            'avatar' => 'Avatar',
+            'price_name' => Yii::t('modules/notifications', 'Price Name'),
+            'name' => Yii::t('modules/notifications','Name'),
+            'email' => Yii::t('modules/notifications', 'Email'),
+            'phone_digital' => Yii::t('modules/notifications','Phone Digital'),
+            'status' => Yii::t('modules/notifications','Status'),
+			'created_at' => Yii::t('modules/notifications', 'created_at'),
+            'updated_at' => Yii::t('modules/notifications', 'updated_at'),
+            
         ];
     }
 

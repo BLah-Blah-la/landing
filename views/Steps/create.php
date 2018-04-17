@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Steps */
 
-$this->title = 'Create Steps';
-$this->params['breadcrumbs'][] = ['label' => 'Steps', 'url' => ['index']];
+$this->title = Yii::t('modules/notifications', 'Create');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/notifications', 'Steps'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="steps-create">

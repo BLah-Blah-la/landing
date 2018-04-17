@@ -9,7 +9,7 @@ use nirvana\showloading\ShowLoadingAsset;
 use timurmelnikov\widgets\LoadingOverlayPjax;
 use vendor\landing\partner\models\Advantages;
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Advantages', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/notifications', 'Advantages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="advantages-view">
@@ -24,8 +24,8 @@ $('#my-content-panel-id').hideLoading();
                   'color'=> 'rgba(102, 255, 204, 0.2)',
                   'elementOverlay' => '#element'
 ]); ?>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary', 'id' => 'element']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('modules/notifications','Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary', 'id' => 'element']) ?>
+        <?= Html::a(Yii::t('modules/notifications','Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
 			
             'data' => [
@@ -44,7 +44,7 @@ $('#my-content-panel-id').hideLoading();
             'description:ntext',
              [
                 /* 'attribute' => 'logo', */
-                'label' => 'Логотип',
+                'label' => Yii::t('modules/notifications',  'Image'),
                 'format' => 'raw',
                 'value' => function($data){
                     return 

@@ -1,6 +1,7 @@
 <?php
 
 namespace vendor\landing\partner\models;
+use backend\models\lopez;
 
 use Yii;
 
@@ -46,8 +47,8 @@ class Contacts extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'image_item' => 'Image Item',
-            'dynamic_string' => 'Dynamic String',
+            'image_item' => Yii::t('modules/notifications', 'Image'),
+            'dynamic_string' => Yii::t('modules/notifications', 'Dynamic String'),
         ];
     }
 	public function upload($path)
@@ -55,4 +56,64 @@ class Contacts extends \yii\db\ActiveRecord
 		$this->image_item = $path;
 		return true;
 		}
+	public function savePreview($path, $path_one, $path_two){
+       $preview = new lopez();
+	   $this->preview = $preview->square_preview('partner/' . $path, 200, $path_one, $path_two);
+	   return true;
+	}
+	
+	public function beforeSave($insert){
+		
+		if(parent::beforeSave($insert)){
+			
+			$id = Yii::$app->request->get('id');
+			$i = (integer)0;
+			
+		    $one = Contacts::find()->select(['preview', 'image_item'])->where(['id' => $id])->all();
+			
+			if($one[$i++]['preview'] || $one[$i++]['image_item'] !== NULL):
+				
+				foreach($one as $var):
+				unlink('partner/' . $var->preview);
+				unlink('partner/' . $var->image_item);
+				endforeach;
+				
+			endif;
+			
+			return true;
+			
+		} else {
+			
+			return false;
+		}
+	}
+	
+	
+	public function beforeDelete(){
+		
+		if(parent::beforeDelete()){
+			
+			$id = Yii::$app->request->get('id');
+		    $one = Contacts::find()->select(['preview', 'image_item'])->where(['id' => $id])->all();
+			$i = (integer)0;
+			
+			if($one[$i++]['preview'] || $one[$i++]['image_item'] !== NULL):
+			foreach($one as $var):
+			
+			unlink('partner/' . $var->preview);
+			unlink('partner/' . $var->image_item);
+			
+			endforeach;
+			
+			endif;
+			
+			return true;
+		} else {
+				
+			return false;
+		}
+		
+		
+	}	
+
 }

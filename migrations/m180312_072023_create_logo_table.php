@@ -15,6 +15,8 @@ class m180312_072023_create_logo_table extends Migration
         $this->createTable('logo', [
             'id' => $this->primaryKey(),
             'logo_image' => $this->string(255),
+			'preview' => $this->string(255),
+
         ]);
     }
 

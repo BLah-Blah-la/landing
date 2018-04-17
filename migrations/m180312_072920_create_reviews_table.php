@@ -19,6 +19,8 @@ class m180312_072920_create_reviews_table extends Migration
 			'status' => $this->string(255),
             'text' => $this->text(),
             'image' => $this->string(255),
+			'preview' => $this->string(255),
+
         ]);
     }
 

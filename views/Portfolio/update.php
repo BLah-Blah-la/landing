@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Portfolio */
 
-$this->title = 'Update Portfolio: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Portfolios', 'url' => ['index']];
+$this->title = Yii::t('modules/notifications','Update');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/notifications', 'Portfolios'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

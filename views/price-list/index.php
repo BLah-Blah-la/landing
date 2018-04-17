@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\landing\search\PriceList */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Price Lists';
+$this->title = Yii::t('modules/notifications', 'Price-list');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="price-list-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Price List', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('modules/notifications', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

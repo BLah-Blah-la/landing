@@ -9,7 +9,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\models\landing\search\StepsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Steps';
+$this->title = Yii::t('modules/notifications', 'Steps');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="steps-index">
@@ -19,31 +19,40 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Steps', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('modules/notifications', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+		'options' => ['class' => 'table-responsive'],
+        'tableOptions' => ['class' => 'table table-condensed'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'title_item',
             'description:ntext',
-            
             [
-			  'label' => 'image',
-			  'format' => 'raw',
-			  'value' => function($data){
-				  
-				  return Html::img(Url::toRoute($data->image),
-				  [
-				  'style' => 'width:50px;height:50px'
-				  ]);
-			  }
-			
-			],
+                /* 'attribute' => 'logo', */
+                'label' =>  Yii::t('modules/notifications',  'Image'),
+                'format' => 'raw',
+                'value' => function($data){
+                    return 
+					Html::a(
+					Html::img(Url::toRoute($data->preview),[
+
+                        'style' => 'width:50px;height:50px',
+						'id' => 'img',
+                    ]),
+					/* 'url' => Html::img(Url::toRoute($data->logo),[
+
+                        'style' => 'width:150px;height:150px',
+                    ]), */
+					[$data->image],
+					['data-fancybox' => 'gallery']
+				);
+                },
+            ],	
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -17,6 +17,8 @@ class m180312_072632_create_steps_table extends Migration
             'title_item' => $this->string(30),
             'description' => $this->text(),
             'image' => $this->string(50),
+			'preview' => $this->string(255),
+
         ]);
     }
 

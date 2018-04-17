@@ -52,10 +52,10 @@ class PriceList extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'value' => 'Value',
-            'terms' => 'Terms',
-            'description' => 'Description',
+            'name' => Yii::t('modules/notifications', 'Name'),
+            'value' => Yii::t('modules/notifications', 'Value'),
+            'terms' => Yii::t('modules/notifications', 'Terms'),
+            'description' => Yii::t('modules/notifications', 'Description'),
         ];
     }
     

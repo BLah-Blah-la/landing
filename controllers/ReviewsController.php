@@ -80,7 +80,8 @@ class ReviewsController extends Controller
     public function actionCreate()
     {
         $model = new Reviews();
-
+        $path_one = 'partner/images/Reviews/preview/';
+		$path_two = 'images/Reviews/preview/';
         if ($model->load(Yii::$app->request->post())) {
 
             $uploadedFile = UploadedFile::getInstance($model, 'img');
@@ -94,21 +95,23 @@ class ReviewsController extends Controller
                     $model->upload($path);
 					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
             }
             if ($model->save()) {
-
+              
                return $this->redirect(['view', 'id' => $model->id]);
 
             }
-        }
+        }            
 
         return $this->render('create', [
             'model' => $model
             ]);
     }
+
     /**
-     * Updates an existing Reviews model.
+     * Updates an existing Contacts model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -117,22 +120,24 @@ class ReviewsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if ($model->load(Yii::$app->request->post())){
-			
-			$uploadedFile = UploadedFile::getInstance($model, 'img');
-			if ($uploadedFile !== null) {
+        $path_one = 'partner/images/Reviews/preview/';
+		$path_two = 'images/Reviews/preview/';
+        if ($model->load(Yii::$app->request->post())) {
+
+            $uploadedFile = UploadedFile::getInstance($model, 'img');
+
+            if ($uploadedFile !== null) {
                 $path = 'images/Reviews/'
                     . Yii::$app->security->generateRandomString()
                     . '.' . $uploadedFile->extension;
                 
                 if ($model->validate()) {
                     $model->upload($path);
+					
                     $uploadedFile->saveAs('partner/' . $path);
+					$model->savePreview($path, $path_one, $path_two);
                 }
-            }
-			
-			
+            }	
 		 if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -141,7 +146,6 @@ class ReviewsController extends Controller
             'model' => $model,
         ]);
     }
-
     /**
      * Deletes an existing Reviews model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

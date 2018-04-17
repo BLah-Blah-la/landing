@@ -47,8 +47,8 @@ class Titles extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'section' => 'Section',
-            'text' => 'Text',
+            'section' => Yii::t('modules/notifications', 'Section'),
+            'text' => Yii::t('modules/notifications', 'Text'),
         ];
     }
 }

@@ -16,6 +16,8 @@ class m180312_072230_create_portfolio_table extends Migration
             'id' => $this->primaryKey(),
             'image_site' => $this->string(255),
 			'name_company' => $this->string(255),
+			'preview' => $this->string(255),
+			
         ]);
     
 	}

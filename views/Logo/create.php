@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Logo */
 
-$this->title = 'Create Logo';
+$this->title = Yii::t('modules/notifications', 'Create');
 $this->params['breadcrumbs'][] = ['label' => 'Logos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

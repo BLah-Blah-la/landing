@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use vendor\landing\partner\models\Reviews;
 use yii\helpers\Url;
+use kartik\file\FileInput;
 /* @var $this yii\web\View */
 /* @var $model backend\models\landing\Reviews */
 /* @var $form yii\widgets\ActiveForm */
@@ -21,10 +22,11 @@ use yii\helpers\Url;
     
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'img')->fileInput()->label('Заменить') ?>
+    <?= $form->field($model, 'img')->widget(FileInput::classname(), [
+    'options' => ['accept' => 'image/*']])?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('modules/notifications', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

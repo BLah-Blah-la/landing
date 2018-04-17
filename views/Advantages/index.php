@@ -10,7 +10,7 @@ use yii2mod\linkpreview\LinkPreview;
 /* @var $searchModel backend\models\landing\search\AdvantagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Advantages';
+$this->title = Yii::t('modules/notifications', 'Advantages');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="advantages-index" id = "element">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
     <p>
 	
-        <?= Html::a('Create Advantages', ['create'], ['class' => 'btn btn-success', 'id' => 'element']) ?>
+        <?= Html::a(Yii::t('modules/notifications', 'Create'), ['create'], ['class' => 'btn btn-success', 'id' => 'element']) ?>
     </p>
    <?php LoadingOverlayPjax::end(); ?>
    
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
             [
                 /* 'attribute' => 'logo', */
-                'label' => 'Логотип',
+                'label' =>  Yii::t('modules/notifications',  'Image'),
                 'format' => 'raw',
                 'value' => function($data){
                     return 
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-             'header'=>'Действия',
+             'header'=> Yii::t('modules/notifications', 'Actions'),
             'headerOptions' => ['width' => '80'],
             'template' => '{view} {update} {delete}{link}',
 
